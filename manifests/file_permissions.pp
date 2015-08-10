@@ -20,22 +20,22 @@ class audit::file_permissions {
 # First, establish what \emph{system audit logs} and \emph{audit tool
 # executables} are.
     $audit_data = $::osfamily ? {
-        'darwin' => '/var/audit',
-        'redhat' => '/var/log/audit',
-        default  => unimplemented,
+        'Darwin' => '/var/audit',
+        'RedHat' => '/var/log/audit',
+        default  => fail("unimplemented on ${::osfamily}"),
     }
     $audit_tools = $::osfamily ? {
 # This list of executables comes from the check content in the Mac OS X STIG.
-        'darwin' => ['/usr/sbin/audit', '/usr/sbin/auditd',
+        'Darwin' => ['/usr/sbin/audit', '/usr/sbin/auditd',
                      '/usr/sbin/auditreduce',
                      '/usr/sbin/praudit'],
 # This list of executables comes from \verb!rpm -ql audit!.
-        'redhat' => ['/sbin/audispd', '/sbin/auditctl',
+        'RedHat' => ['/sbin/audispd', '/sbin/auditctl',
                      '/sbin/auditd', '/sbin/aureport',
                      '/sbin/ausearch', '/sbin/autrace',
                      '/usr/bin/aulast', '/usr/bin/aulastlog',
                      '/usr/bin/ausyscall'],
-        default  => unimplemented,
+        default  => fail("unimplemented on ${::osfamily}"),
     }
 
 # \implements{iacontrol}{ECRR-1}%
@@ -55,6 +55,9 @@ class audit::file_permissions {
         }
         'Darwin': {
             audit::darwin::permissions { $audit_data: }
+        }
+        default: {
+            fail "unimplemented on ${::osfamily}"
         }
     }
 
