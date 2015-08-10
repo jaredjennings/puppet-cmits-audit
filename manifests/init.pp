@@ -39,6 +39,7 @@
 # requirements.
 
 class audit {
-    include "audit::${::osfamily}"
+    $lower_osfamily = downcase($::osfamily)
+    include "audit::${lower_osfamily}"
     include audit::file_permissions
 }
