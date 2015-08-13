@@ -91,7 +91,7 @@ class audit::remote::collect($realm) {
 # Configure admin access to the KDC.
 
     file { "/var/kerberos/krb5kdc/kadm5.acl":
-        owner => root, group => 0, mode => 0600,
+        owner => root, group => 0, mode => '0600',
         content => "*/admin@$realm\t*\n",
     }
 

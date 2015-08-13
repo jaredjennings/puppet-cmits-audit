@@ -47,7 +47,7 @@ class audit::file_permissions {
 # Ensure proper ownership and permissions on audit logs.
             file { $audit_data:
                 recurse => inf,
-                owner => root, group => 0, mode => 0600,
+                owner => root, group => 0, mode => '0600',
             }
 # \implements{unixsrg}{GEN002710}%
 # Remove extended ACLs on audit logs.

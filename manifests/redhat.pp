@@ -29,7 +29,7 @@ class audit::redhat {
 # \implements{unixsrg}{GEN003100,GEN003120,GEN003140}%
 # Use mode \verb!0700! for the auditd daily cron script, as required.
     file { "/etc/cron.daily/auditd.cron":
-        owner => root, group => 0, mode => 0700,
+        owner => root, group => 0, mode => '0700',
         source => "puppet:///modules/audit/auditd.cron",
     }
 # We need a non-stock Augeas lens to edit the auditd.conf.
@@ -68,7 +68,7 @@ class audit::redhat {
 # Configure the auditing subsystem according to the requirements of the UNIX
 # SRG.
     file { "/etc/audit/audit.rules":
-        owner => root, group => 0, mode => 0640,
+        owner => root, group => 0, mode => '0640',
         source => "puppet:///modules/audit/\
 ${architecture}-stig.rules",
         notify => Service["auditd"],
