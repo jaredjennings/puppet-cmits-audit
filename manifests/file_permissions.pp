@@ -46,7 +46,7 @@ class audit::file_permissions {
 # \implements{unixsrg}{GEN002680,GEN002690,GEN002700}%
 # Ensure proper ownership and permissions on audit logs.
             file { $audit_data:
-                recurse => 999,
+                recurse => inf,
                 owner => root, group => 0, mode => '0600',
             }
 # \implements{unixsrg}{GEN002710}%
